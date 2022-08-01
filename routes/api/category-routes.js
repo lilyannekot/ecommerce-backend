@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   })
     .then((categoryData) => {
       if (!categoryData) {
-        res.status(404).json({ message: "No categories were found" });
+        res.status(404).json({ message: "No categories could be found!" });
         return;
       }
     })
@@ -24,8 +24,26 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+  // Find one category by its `id` value
+  Category.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: {
+      model: Product,
+      attributes: ["id", "product_name", "price", "stock", "category_id"],
+    },
+  })
+    .then((categoryData) => {
+      if (!categoryData) {
+        res.status(404).json({ message: "No category could be found!" });
+        return;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post("/", (req, res) => {
