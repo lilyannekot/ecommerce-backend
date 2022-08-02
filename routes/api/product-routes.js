@@ -46,7 +46,12 @@ router.get("/:id", (req, res) => {
         attributes: ["tag_name"],
       },
     ],
-  });
+  })
+    .then((productData) => res.json(productData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // Create new product

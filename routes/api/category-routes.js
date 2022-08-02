@@ -15,6 +15,8 @@ router.get("/", (req, res) => {
       if (!categoryData) {
         res.status(404).json({ message: "No categories could be found!" });
         return;
+      } else {
+        res.json(categoryData);
       }
     })
     .catch((err) => {
