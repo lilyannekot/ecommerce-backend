@@ -62,7 +62,7 @@ router.post("/", (req, res) => {
   Product.create({
     product_name: req.body.product_name,
     price: req.body.price,
-    sotck: req.body.stock,
+    stock: req.body.stock,
     category_id: req.body.category_id,
     tagIds: req.body.tagIds,
   })
@@ -140,7 +140,7 @@ router.delete("/:id", (req, res) => {
       if (!productData) {
         res
           .status(404)
-          .json({ message: "No product could be found with this id" });
+          .json({ message: "No product could be found with this id!" });
       }
       res.json(productData);
     })
