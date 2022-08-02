@@ -40,6 +40,8 @@ router.get("/:id", (req, res) => {
       if (!categoryData) {
         res.status(404).json({ message: "No category could be found!" });
         return;
+      } else {
+        res.json(categoryData);
       }
     })
     .catch((err) => {
@@ -51,7 +53,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   // Create a new category
   Category.create({
-    category_name: "req.body.category_name",
+    category_name: req.body.category_name,
   })
     .then((categoryData) => res.json(categoryData))
     .catch((err) => {
@@ -87,8 +89,11 @@ router.delete("/:id", (req, res) => {
   })
     .then((categoryData) => {
       if (!categoryData) {
-        res.json(404).json({ message: "No category could be found!" });
+        res
+          .status(404)
+          .json({ message: "No category could be found with this id!" });
       }
+      res.json(categoryData);
     })
     .catch((err) => {
       console.log(err);
