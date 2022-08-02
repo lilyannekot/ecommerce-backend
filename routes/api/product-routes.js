@@ -64,6 +64,7 @@ router.post("/", (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+
   Product.create(req.body, {
     where: {
       product_name: req.body.product_name,
@@ -102,7 +103,7 @@ router.put("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((product) => {
+    .then((productData) => {
       // Find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
