@@ -53,4 +53,3 @@ router.get("/:id", (req, res) => {
 
 - [GitHub](https://github.com/lilyannekot)
 - [LinkedIn](https://www.linkedin.com/in/lilykot/)
-- [Full-Project-Demonstration]()
